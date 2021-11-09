@@ -10,6 +10,7 @@ daemon: server.daemon ## Start
 
 stop: server.stop ## Stop
 
+oi: help help
 
 include makefiles/server.mk
 include makefiles/test.mk

@@ -24,3 +24,10 @@ class UserRepository:
         user = User(last_name=last_name, first_name=first_name, age=age)
 
         return user.save()
+
+    @staticmethod
+    def delete(self,last_name, first_name, age):
+        """ Delete a user """
+        user = self.get(last_name, first_name)
+
+        return user.delete()

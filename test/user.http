@@ -1,0 +1,7 @@
+### Cria um projeto sem ambientes sevir
+POST http://127.0.0.1:3000/application/user/Doe/John
+Content-Type: application/json
+
+{
+    "age": 30
+}

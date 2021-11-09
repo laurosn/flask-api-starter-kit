@@ -43,3 +43,11 @@ class UserResource(Resource):
         repository = UserRepository()
         user = repository.update(last_name=last_name, first_name=first_name, age=age)
         return jsonify({"user": user.json})
+
+
+    @staticmethod
+    @swag_from("../swagger/user/DELETE.yml")
+    def delete(last_name, first_name):
+        repository = UserRepository()
+        user = repository.delete(last_name=last_name, first_name=first_name)
+ 

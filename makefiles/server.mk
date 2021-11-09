@@ -2,7 +2,7 @@
 # ¯¯¯¯¯¯¯¯¯¯¯
 
 server.install: ## Install server with its dependencies
-	docker-compose run --rm server pip install -r requirements-dev.txt --user --upgrade --no-warn-script-location
+	docker-compose run --rm server pip install --proxy=http://10.1.0.106 -r requirements-dev.txt --user --upgrade --no-warn-script-location
 
 server.start: ## Start server in its docker container
 	docker-compose up server
