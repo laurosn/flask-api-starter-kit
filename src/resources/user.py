@@ -50,4 +50,8 @@ class UserResource(Resource):
     def delete(last_name, first_name):
         repository = UserRepository()
         user = repository.delete(last_name=last_name, first_name=first_name)
+        if user:
+            return jsonify({"delete": f"usuário {first_name} excluido com sucesso"})
+        else:
+            return jsonify({"delete": f"usuário {first_name} nao encontrado"})
  

@@ -1,7 +1,11 @@
-### Cria um projeto sem ambientes sevir
+### Cria um USUARIO
 POST http://127.0.0.1:3000/application/user/Doe/John
 Content-Type: application/json
 
 {
     "age": 30
 }
+
+
+### Deleta o usuario
+DELETE http://127.0.0.1:3000/application/user/Doe/John

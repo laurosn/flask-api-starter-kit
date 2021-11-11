@@ -9,7 +9,7 @@ class UserRepository:
     @staticmethod
     def get(last_name, first_name):
         """ Query a user by last and first name """
-        return User.query.filter_by(last_name=last_name, first_name=first_name).one()
+        return User.query.filter_by(last_name=last_name, first_name=first_name).one_or_none()
 
     def update(self, last_name, first_name, age):
         """ Update a user's age """
@@ -25,9 +25,10 @@ class UserRepository:
 
         return user.save()
 
-    @staticmethod
-    def delete(self,last_name, first_name, age):
+    def delete(self, last_name, first_name):
         """ Delete a user """
         user = self.get(last_name, first_name)
+        if user:
+            user.delete()
+        return user
 
-        return user.delete()
