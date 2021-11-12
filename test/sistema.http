@@ -1,0 +1,23 @@
+### Cria um USUARIO
+POST http://127.0.0.1:3000/application/sistema/1
+Content-Type: application/json
+
+{
+    "name": "sistema 1",
+    "environment": "prod"
+}
+
+### Obtem um SISTEMA
+GET http://127.0.0.1:3000/application/sistema/1
+
+### Atualiza um USUARIO
+PUT http://127.0.0.1:3000/application/sistema/1
+Content-Type: application/json
+
+{
+    "name": "sistema 1",
+    "environment": "tes"
+}
+
+### Deleta o usuario
+DELETE http://127.0.0.1:3000/application/user/Doe/John

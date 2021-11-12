@@ -1,0 +1,29 @@
+Update an sistema based on the sent information
+---
+tags:
+  - sistema
+parameters:
+  - name: id
+    in: path
+    type: integer
+    description: the id of the sistema
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the sistema
+        environment:
+          type: string
+          description: The environment of the sistema    
+responses:
+  200:
+    description: The sistema was successfully created
+    schema:
+      example:
+        sistema:
+          id: 1
+          name: sistema 1
+          environment: prod

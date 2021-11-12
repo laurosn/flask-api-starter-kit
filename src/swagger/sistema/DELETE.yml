@@ -1,0 +1,16 @@
+delete an sistema based on the sent information
+---
+tags:
+  - sistema
+parameters:
+  - name: id
+    in: path
+    type: integer
+    description: the id of the sistema
+responses:
+  200:
+    description: The sistema was successfully deleted
+    schema:
+      example:
+        sistema:
+          id: 1
