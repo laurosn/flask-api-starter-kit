@@ -1,0 +1,28 @@
+### Cria um SISTEMA
+POST http://127.0.0.1:3000/application/sistema/1/comando/1
+Content-Type: application/json
+
+{
+    "name": "comando 1",
+    "parametros": "parm1"
+}
+
+### Obtem um SISTEMA
+GET http://127.0.0.1:3000/application/sistema/1/comando/1
+
+
+### Obtem os comandos de um sistema
+GET http://127.0.0.1:3000/application/sistema/1/comando/1
+
+
+### Atualiza um USUARIO
+PUT http://127.0.0.1:3000/application/sistema/1/comando/1
+Content-Type: application/json
+
+{
+    "name": "comando 1",
+    "parametros": "parm1 alterado"
+}
+
+### Deleta o usuario
+DELETE http://127.0.0.1:3000/application/sistema/1/comando/1

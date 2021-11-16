@@ -1,4 +1,4 @@
-### Cria um USUARIO
+### Cria um SISTEMA
 POST http://127.0.0.1:3000/application/sistema/1
 Content-Type: application/json
 
@@ -9,6 +9,11 @@ Content-Type: application/json
 
 ### Obtem um SISTEMA
 GET http://127.0.0.1:3000/application/sistema/1
+
+
+### Obtem os comandos de um sistema
+GET http://127.0.0.1:3000/application/sistema/1/comandos
+
 
 ### Atualiza um USUARIO
 PUT http://127.0.0.1:3000/application/sistema/1

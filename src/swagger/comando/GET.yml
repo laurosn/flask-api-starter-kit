@@ -1,0 +1,23 @@
+Return an comando key information based on his id
+---
+tags:
+  - comando
+parameters:
+  - name: id
+    in: path
+    type: integer
+    description: the id of the comando
+  - name: id_sistema
+    in: path
+    type: integer
+    description: the id of the sistema
+responses:
+  200:
+    description: The comando's information were successfully retrieved
+    schema:
+      example:
+        comando:
+          id: 1
+          id_sistema: 1
+          name: comando 1
+          parametros: par1 par2

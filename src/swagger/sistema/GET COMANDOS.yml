@@ -1,0 +1,18 @@
+Return an sistema key information based on his id
+---
+tags:
+  - sistema
+parameters:
+  - name: id
+    in: path
+    type: integer
+    description: the id of the sistema
+responses:
+  200:
+    description: The sistema's information were successfully retrieved
+    schema:
+      example:
+        sistema:
+          id: 1
+          name: sistema 1
+          environment: prod
