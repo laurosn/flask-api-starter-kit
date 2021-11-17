@@ -10,6 +10,11 @@ class ComandoRepository:
     def get(id):
         """ Query a comando by id """
         return Comando.query.filter_by(id=id).one_or_none()
+    
+    @staticmethod
+    def get_by_sistema(id):
+        """ Query a comando by sistema """
+        return Comando.query.filter_by(sistema_id=id).all()
 
     def update(self, id, name, parametros, sistema_id):
         """ Update a comando """

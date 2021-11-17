@@ -7,7 +7,7 @@ parameters:
     in: path
     type: integer
     description: the id of the comando
-  - name: id_sistema
+  - name: sistema_id
     in: path
     type: integer
     description: the id of the sistema
@@ -18,4 +18,4 @@ responses:
       example:
         comando:
           id: 1
-          id_sistema: 1
+          sistema_id: 1

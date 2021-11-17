@@ -4,7 +4,7 @@ from flask.blueprints import Blueprint
 
 import config
 import routes
-from models import db
+from models import db, ma
 
 # config your API specs
 # you can define multiple specs in the case your api has multiple versions
@@ -13,7 +13,6 @@ from models import db
 #   returns a boolean to filter in only desired views
 
 server = Flask(__name__)
-
 server.config["SWAGGER"] = {
     "swagger_version": "2.0",
     "title": "Application",
@@ -36,7 +35,8 @@ server.config["SQLALCHEMY_DATABASE_URI"] = config.DB_URI
 server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS
 db.init_app(server)
 db.app = server
-
+ma.init_app(server)
+ma.app = server
 for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):
         server.register_blueprint(blueprint, url_prefix=config.APPLICATION_ROOT)

@@ -8,6 +8,7 @@ from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
 from repositories import SistemaRepository
+from models import SistemaSchema
 from util import parse_params
 
 
@@ -18,8 +19,10 @@ class SistemaResource(Resource):
     @swag_from("../swagger/sistema/GET.yml")
     def get(id):
         """ Return an sistema key information based on his id """
-        sistema = SistemaRepository.get(id=id)
-        return jsonify({"sistema": sistema.json})
+        sistema_schema = SistemaSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return sistema_schema.dump(SistemaRepository.get(id=id))
+        #return jsonify({"sistema": sistema.json})
 
     @staticmethod
     @parse_params(
@@ -32,7 +35,10 @@ class SistemaResource(Resource):
         sistema = SistemaRepository.create(
             id=id, name=name, environment=environment
         )
-        return jsonify({"sistema": sistema.json})
+        sistema_schema = SistemaSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return sistema_schema.dump(sistema)
+        #return jsonify({"sistema": sistema.json})
 
     @staticmethod
     @parse_params(
@@ -44,7 +50,10 @@ class SistemaResource(Resource):
         """ Update an sistema based on the sent information """
         repository = SistemaRepository()
         sistema = repository.update(id=id, name=name, environment=environment)
-        return jsonify({"sistema": sistema.json})
+        sistema_schema = SistemaSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return sistema_schema.dump(sistema).data
+        #return jsonify({"sistema": sistema.json})
 
 
     @staticmethod

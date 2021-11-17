@@ -9,6 +9,7 @@ from flask_restful.reqparse import Argument
 
 from repositories import ComandoRepository,SistemaRepository
 from util import parse_params
+from models import ComandoSchema
 
 
 class ComandoResource(Resource):
@@ -16,14 +17,16 @@ class ComandoResource(Resource):
 
     @staticmethod
     @swag_from("../swagger/comando/GET.yml")
-    def get(id, id_sistema):
+    def get(id, sistema_id):
         """ Return an comando key information based on his id """
         sistema_repository = SistemaRepository() 
-        sistema = sistema_repository.get(id=id_sistema)
+        sistema = sistema_repository.get(id=sistema_id)
         if not sistema:
-            return jsonify({"post": f"sistema {id_sistema} nao encontrado"})
+            return jsonify({"post": f"sistema {sistema_id} nao encontrado"})
         comando = ComandoRepository.get(id=id)
-        return jsonify({"comando": comando.json})
+        comando_schema = ComandoSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return comando_schema.dump(comando)
 
     @staticmethod
     @parse_params(
@@ -31,16 +34,18 @@ class ComandoResource(Resource):
         Argument("name", location="json", required=True, help="The name of the sistema.")
     )
     @swag_from("../swagger/comando/POST.yml")
-    def post(id, name, parametros, id_sistema):
+    def post(id, name, parametros, sistema_id):
         """ Create an comando based on the sent information """
         sistema_repository = SistemaRepository() 
-        sistema = sistema_repository.get(id=id_sistema)
+        sistema = sistema_repository.get(id=sistema_id)
         if not sistema:
-            return jsonify({"post": f"sistema {id_sistema} nao encontrado"})
+            return jsonify({"post": f"sistema {sistema_id} nao encontrado"})
         comando = ComandoRepository.create(
-            id=id, name=name, parametros=parametros, id_sistema=id_sistema
+            id=id, name=name, parametros=parametros, sistema_id=sistema_id
         )
-        return jsonify({"comando": comando.json})
+        comando_schema = ComandoSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return comando_schema.dump(comando)
 
     @staticmethod
     @parse_params(
@@ -48,25 +53,27 @@ class ComandoResource(Resource):
         Argument("name", location="json", required=True, help="The name of the sistema.")
     )
     @swag_from("../swagger/comando/PUT.yml")
-    def put(id, name, parametros, id_sistema):
+    def put(id, name, parametros, sistema_id):
         """ Update an comando based on the sent information """
         sistema_repository = SistemaRepository() 
-        sistema = sistema_repository.get(id=id_sistema)
+        sistema = sistema_repository.get(id=sistema_id)
         if not sistema:
-            return jsonify({"put": f"sistema {id_sistema} nao encontrado"})
+            return jsonify({"put": f"sistema {sistema_id} nao encontrado"})
 
         repository = ComandoRepository()
-        comando = repository.update(id=id, name=name, parametros=parametros, id_sistema=id_sistema)
-        return jsonify({"comando": comando.json})
+        comando = repository.update(id=id, name=name, parametros=parametros, sistema_id=sistema_id)
+        comando_schema = ComandoSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return comando_schema.dump(comando)
 
 
     @staticmethod
     @swag_from("../swagger/comando/DELETE.yml")
-    def delete(id, id_sistema):
+    def delete(id, sistema_id):
         sistema_repository = SistemaRepository() 
-        sistema = sistema_repository.get(id=id_sistema)
+        sistema = sistema_repository.get(id=sistema_id)
         if not sistema:
-            return jsonify({"delete": f"sistema {id_sistema} nao encontrado"})
+            return jsonify({"delete": f"sistema {sistema_id} nao encontrado"})
 
         repository = ComandoRepository()
         comando = repository.delete(id=id)

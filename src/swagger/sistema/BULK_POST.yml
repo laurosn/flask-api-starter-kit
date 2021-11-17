@@ -1,0 +1,31 @@
+Create an sistema based on the sent information
+---
+tags:
+  - sistema
+parameters:
+  - name: sistemas
+    in: body
+    required: true
+    schema:
+      type: array 
+      items:
+        $ref: '#/definitions/Sistema' 
+definitions:
+  Sistema:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      environment:
+        type: string    
+responses:
+  200:
+    description: The sistema was successfully created
+    schema:
+      example:
+        sistema:
+          id: 1
+          name: sistema 1
+          environment: prod

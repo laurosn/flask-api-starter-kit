@@ -1,11 +1,11 @@
 """
 Define the Comando model
 """
-from . import db
+from . import db, ma
 from .abc import BaseModel, MetaBaseModel
+# from server import ma
 
-
-class Comando(db.Model, BaseModel, metaclass=MetaBaseModel):
+class Comando(db.Model):
     """ The Comando model """
 
     __tablename__ = "comando"
@@ -24,3 +24,17 @@ class Comando(db.Model, BaseModel, metaclass=MetaBaseModel):
         self.name = name
         self.parametros = parametros
         self.sistema_id = sistema_id
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        return self
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+class ComandoSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Comando
+        sqla_session = db.session

@@ -8,5 +8,5 @@ from resources import ComandoResource
 
 COMANDO_BLUEPRINT = Blueprint("comando", __name__)
 Api(COMANDO_BLUEPRINT).add_resource(
-    ComandoResource, "/sistema/<int:id_sistema>/comando/<int:id>", "comando_resource"
+    ComandoResource, "/sistema/<int:sistema_id>/comando/<int:id>", "comando_resource"
 )

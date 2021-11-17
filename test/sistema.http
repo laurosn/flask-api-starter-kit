@@ -7,8 +7,32 @@ Content-Type: application/json
     "environment": "prod"
 }
 
+### Cria um varios sistemas
+POST http://127.0.0.1:3000/application/sistemas/
+Content-Type: application/json
+
+{
+  "sistemas": [
+   {
+    "id": 2,
+    "name": "sistema 2",
+    "environment": "prod"
+   },
+   {
+    "id": 3,
+    "name": "sistema 3",
+    "environment": "prod"
+   },
+   {
+    "id": 4,
+    "name": "sistema 4",
+    "environment": "prod"
+   }
+ ]
+}
+
 ### Obtem um SISTEMA
-GET http://127.0.0.1:3000/application/sistema/1
+GET http://127.0.0.1:3000/application/sistema/2
 
 
 ### Obtem os comandos de um sistema
@@ -25,4 +49,4 @@ Content-Type: application/json
 }
 
 ### Deleta o usuario
-DELETE http://127.0.0.1:3000/application/user/Doe/John
+DELETE http://127.0.0.1:3000/application/sistema/1
