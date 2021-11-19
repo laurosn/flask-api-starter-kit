@@ -1,0 +1,22 @@
+Return an sistema key information based on his id
+---
+tags:
+  - sistema
+#parameters:
+definitions:
+  Sistema:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      environment:
+        type: string 
+responses:
+  200:
+    description: The sistema's information were successfully retrieved
+    schema:
+      type: array 
+      items:
+        $ref: '#/definitions/Sistema' 

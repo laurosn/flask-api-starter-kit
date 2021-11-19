@@ -4,20 +4,20 @@ Defines the blueprint for the sistema
 from flask import Blueprint
 from flask_restful import Api
 
-from resources import SistemaResource, ListaComandosBySistemaResource, SistemasResource
+from resources import SistemaResource, ComandosResource, SistemasResource
 
 
 
 SISTEMA_BLUEPRINT = Blueprint("sistema", __name__)
 
 Api(SISTEMA_BLUEPRINT).add_resource(
-    ListaComandosBySistemaResource, "/sistema/<int:id>/comandos", "lista_comandos_sistema"
+    ComandosResource, "/sistema/<int:id>/comandos", "/comandos"
 )
 
 Api(SISTEMA_BLUEPRINT).add_resource(
-    SistemaResource, "/sistema/<int:id>", "sistema"
+    SistemaResource, "/sistema/<int:id>", "/sistema"
 )
 
 Api(SISTEMA_BLUEPRINT).add_resource(
-    SistemasResource, "/sistemas/", "sistemas"
+    SistemasResource, "/sistemas/", "/sistemas"
 )

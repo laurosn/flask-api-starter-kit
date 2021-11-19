@@ -16,13 +16,14 @@ class Comando(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(255))
     parametros = db.Column(db.String(255))
+    retorno = db.Column(db.String(255))
     sistema_id = db.Column(db.Integer, db.ForeignKey('sistema.id'))
 
-    def __init__(self, id, name , parametros, sistema_id):
+    def __init__(self,  name , parametros, retorno, sistema_id):
         """ Create a new Sistema """
-        self.id = id
         self.name = name
         self.parametros = parametros
+        self.retorno = retorno
         self.sistema_id = sistema_id
 
     def save(self):

@@ -14,8 +14,3 @@ parameters:
 responses:
   200:
     description: The comando was successfully deleted
-    schema:
-      example:
-        comando:
-          id: 1
-          sistema_id: 1

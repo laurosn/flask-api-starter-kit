@@ -4,13 +4,15 @@
 ### QUICK
 # ¯¯¯¯¯¯¯
 
-install: server.install ## Install
+install: server.install database.all## Install
 
 daemon: server.daemon ## Start
 
 stop: server.stop ## Stop
 
-oi: help help
+start: server.start
+
+all: install start
 
 include makefiles/server.mk
 include makefiles/test.mk

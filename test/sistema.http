@@ -1,5 +1,5 @@
 ### Cria um SISTEMA
-POST http://127.0.0.1:3000/application/sistema/1
+POST http://127.0.0.1:3000/application/sistema/2
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
     "environment": "prod"
 }
 
-### Cria um varios sistemas
+### Cria varios sistemas
 POST http://127.0.0.1:3000/application/sistemas/
 Content-Type: application/json
 
@@ -31,12 +31,43 @@ Content-Type: application/json
  ]
 }
 
+
+### Obtem todos os sistemas
+GET http://127.0.0.1:3000/application/sistemas/
+
+
+
 ### Obtem um SISTEMA
 GET http://127.0.0.1:3000/application/sistema/2
 
 
 ### Obtem os comandos de um sistema
-GET http://127.0.0.1:3000/application/sistema/1/comandos
+GET http://127.0.0.1:3000/application/sistema/2/comandos
+
+
+### Obtem os comandos de um sistema
+POST http://127.0.0.1:3000/application/sistema/2/comandos
+Content-Type: application/json
+
+{
+  "comandos": [
+   {
+    "name": "comando 12",
+    "parametros": "prod init 22",
+    "retorno": "comando xpto executado com sucesso"
+   },
+   {
+    "name": "comando 122",
+    "parametros": "tes init 23",
+    "retorno": "comando xpto executado com sucesso"
+   },
+   {
+    "name": "comando 4",
+    "parametros": "hom init 33",
+    "retorno": "erro ao executar"
+   }
+ ]
+}
 
 
 ### Atualiza um USUARIO
@@ -49,4 +80,4 @@ Content-Type: application/json
 }
 
 ### Deleta o usuario
-DELETE http://127.0.0.1:3000/application/sistema/1
+DELETE http://127.0.0.1:3000/application/sistema/2

@@ -1,0 +1,30 @@
+Return an sistema key information based on his id
+---
+tags:
+  - sistema
+parameters:
+  - name: id
+    in: path
+    type: integer
+    description: the id of the sistema
+definitions:
+  Comando:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      parametros:
+        type: string 
+      retorno:
+        type: string
+responses:
+  200:
+    description: The sistema's information were successfully retrieved
+    content:
+      application/json:
+        schema:
+          type: array 
+          items:
+            $ref: "#/definitions/Comando"

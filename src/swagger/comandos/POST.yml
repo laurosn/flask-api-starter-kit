@@ -1,0 +1,37 @@
+# Create an sistema based on the sent information
+# ---
+# tags:
+#   - comando
+# parameters:
+#   - name: id
+#     in: path
+#     type: integer
+#     description: the id of the sistema
+#   - name: comandos
+#     in: body
+#     required: true
+#     schema:
+#       type: array 
+#       items:
+#         $ref: '#/definitions/Comando' 
+# definitions:
+#   Comando:
+#     type: object
+#     properties:
+#       id:
+#         type: integer
+#       name:
+#         type: string
+#       parametros:
+#         type: string
+#       retorno:
+#         type: string    
+# responses:
+#   200:
+#     description: The sistema was successfully created
+#     schema:
+#       example:
+#         sistema:
+#           id: 1
+#           name: sistema 1
+#           environment: prod

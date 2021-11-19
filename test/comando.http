@@ -1,28 +1,30 @@
-### Cria um SISTEMA
-POST http://127.0.0.1:3000/application/sistema/1/comando/1
+### Cria um comando
+POST http://127.0.0.1:3000/application/sistema/1/comando/10
 Content-Type: application/json
 
 {
-    "name": "comando 1",
-    "parametros": "parm1"
+    "name": "comando 10",
+    "parametros": "parm2",
+    "retorno": "comando xpto executado com sucesso"
 }
 
-### Obtem um SISTEMA
-GET http://127.0.0.1:3000/application/sistema/1/comando/1
+### Obtem um comando
+GET http://127.0.0.1:3000/application/sistema/2/comando/21
 
 
-### Obtem os comandos de um sistema
-GET http://127.0.0.1:3000/application/sistema/1/comando/1
+### Execucao de um sistema
+GET http://127.0.0.1:3000/application/sistema/2/comando/21/execute
 
 
-### Atualiza um USUARIO
+### Atualiza um comando
 PUT http://127.0.0.1:3000/application/sistema/1/comando/1
 Content-Type: application/json
 
 {
     "name": "comando 1",
-    "parametros": "parm1 alterado"
+    "parametros": "parm1 alterado",
+    "retorno": "comando xpto executado com sucesso"
 }
 
-### Deleta o usuario
+### Deleta o comando
 DELETE http://127.0.0.1:3000/application/sistema/1/comando/1

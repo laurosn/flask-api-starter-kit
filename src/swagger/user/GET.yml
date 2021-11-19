@@ -13,10 +13,8 @@ parameters:
     description: the last name of the user
 responses:
   200:
-    description: The user's information were successfully retrieved
-    schema:
-      example:
-        user:
-          last_name: Doe
-          first_name: John
-          age: 30
+    description: OK
+      # content:
+      #   application/json:
+      #     schema:
+      #       $ref: '#/components/schemas/ArrayOfUsers'

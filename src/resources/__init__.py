@@ -1,6 +1,7 @@
 from .user import UserResource
 from .sistema import SistemaResource
 from .sistemas import SistemasResource
-from .lista_comandos_by_sistema import ListaComandosBySistemaResource
+from .comandos import ComandosResource
 from .comando import ComandoResource
+from .comando_execution import ComandoExecutionResource   
 

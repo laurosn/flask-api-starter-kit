@@ -19,16 +19,25 @@ parameters:
         name:
           type: string
           description: The name of the comando
+        retorno:
+          type: string
+          description: The retorno of the comando        
         parametros:
           type: string
           description: The params of the comando          
 responses:
   200:
     description: The comando was successfully created
-    schema:
-      example:
-        comando:
-          id: 1
-          sistema_id: 1
-          name: comando 1
-          parametros: prod
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:          
+              type: string
+            retorno:          
+              type: string
+            parametros:          
+              type: string
