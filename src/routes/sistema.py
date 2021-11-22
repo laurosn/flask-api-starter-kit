@@ -11,7 +11,7 @@ from resources import SistemaResource, ComandosResource, SistemasResource
 SISTEMA_BLUEPRINT = Blueprint("sistema", __name__)
 
 Api(SISTEMA_BLUEPRINT).add_resource(
-    ComandosResource, "/sistema/<int:id>/comandos", "/comandos"
+    ComandosResource, "/sistema/<int:id>/comandos"
 )
 
 Api(SISTEMA_BLUEPRINT).add_resource(
