@@ -9,7 +9,7 @@ from flask_restful.reqparse import Argument
 from flask import request, make_response
 
 from repositories import SistemaRepository
-from models import SistemaSchema, Sistema
+from models.sistema import SistemaSchema, Sistema
 from util import parse_params
 import json
 

@@ -2,8 +2,7 @@
 Define the Sistema model
 """
 from . import db, ma
-from .abc import BaseModel, MetaBaseModel
-from .comando import ComandoSchema
+from models.comando import ComandoSchema
 # from dataclasses import dataclass
 #from .. import ma
 # from marshmallow_sqlalchemy import ModelSchema

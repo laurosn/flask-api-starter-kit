@@ -7,8 +7,8 @@ server.install: ## Install server with its dependencies
 	docker-compose build nginx
 
 server.start: ## Start server in its docker container
-	docker-compose up server
-	docker-compose up nginx
+	docker-compose up --build --force-recreate server nginx
+#	docker-compose up nginx
 
 server.bash: ## Connect to server to lauch commands
 	docker-compose exec server bash

@@ -11,7 +11,7 @@ from sqlalchemy import exc
 
 from repositories import ComandoRepository,SistemaRepository
 from util import parse_params
-from models import ComandoSchema
+from models.comando import ComandoSchema
 
 
 class ComandoResource(Resource):

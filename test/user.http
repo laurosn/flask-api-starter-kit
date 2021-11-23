@@ -1,9 +1,10 @@
 ### Cria um USUARIO
-POST http://127.0.0.1:3000/application/user/Doe/John
+POST http://127.0.0.1/application/user/register
 Content-Type: application/json
 
 {
-    "age": 30
+    "email": "laurosn@gmail.com",
+    "password": "devops"
 }
 
 

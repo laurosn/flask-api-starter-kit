@@ -14,9 +14,9 @@ RUN pip3 install --proxy=http://10.1.0.106 -r requirements-dev.txt --user --upgr
 RUN pip3 install --proxy=http://10.1.0.106 gunicorn
 # copy project
 COPY . /mnt/
-
+ENV PYTHONPATH /mnt/src
 
 #CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "src.server:server"]
-CMD [ "gunicorn", "--workers=5", "--threads=1", "-b 0.0.0.0:8000", "server:server"]
+CMD [ "gunicorn", "--workers=5", "--threads=1", "-b 0.0.0.0:8000", "server.servidor:app"]
 # run entrypoint.sh
 #ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

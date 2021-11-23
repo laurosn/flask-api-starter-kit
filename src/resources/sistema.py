@@ -8,7 +8,7 @@ from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
 from repositories import SistemaRepository
-from models import SistemaSchema
+from models.sistema import SistemaSchema
 from util import parse_params
 
 

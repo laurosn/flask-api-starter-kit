@@ -11,7 +11,7 @@ from flask_restful.reqparse import Argument
 
 from repositories import ComandoRepository, SistemaRepository
 from util import parse_params
-from models import ComandoSchema 
+from models.comando import ComandoSchema 
 from sqlalchemy import exc
 
 
