@@ -2,16 +2,21 @@
 # ¯¯¯¯¯¯¯¯¯¯¯
 
 server.install: ## Install server with its dependencies
-	docker-compose run --rm server pip install --proxy=http://10.1.0.106 -r requirements-dev.txt --user --upgrade --no-warn-script-location
+#	docker-compose run --rm server pip install --proxy=http://10.1.0.106 -r requirements-dev.txt --user --upgrade --no-warn-script-location
+	docker-compose build server
+	docker-compose build nginx
 
 server.start: ## Start server in its docker container
-	docker-compose up server
+	docker-compose up --build --force-recreate server nginx
+#	docker-compose up nginx
 
 server.bash: ## Connect to server to lauch commands
 	docker-compose exec server bash
 
 server.daemon: ## Start daemon server in its docker container
 	docker-compose up -d server
+	docker-compose up -d nginx
+
 
 server.stop: ## Start server in its docker container
 	docker-compose stop

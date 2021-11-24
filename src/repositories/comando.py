@@ -1,6 +1,7 @@
 """ Defines the Comando repository """
 
-from models import Comando, db
+from models.comando import Comando
+from models import db
 
 
 class ComandoRepository:

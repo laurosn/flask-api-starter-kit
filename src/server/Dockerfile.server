@@ -1,0 +1,22 @@
+FROM python:3.7
+# set work directory
+WORKDIR /mnt
+
+# set environment variables
+#ENV PYTHONDONTWRITEBYTECODE 1
+#ENV PYTHONUNBUFFERED 1
+
+# install dependencies
+#RUN pip install --proxy=http://10.1.0.106 --upgrade pip
+COPY ./requirements.txt /mnt/requirements.txt
+COPY ./requirements-dev.txt /mnt/requirements-dev.txt
+RUN pip3 install --proxy=http://10.1.0.106 -r requirements-dev.txt --user --upgrade --no-warn-script-location
+RUN pip3 install --proxy=http://10.1.0.106 gunicorn
+# copy project
+COPY . /mnt/
+ENV PYTHONPATH /mnt/src
+
+#CMD ["gunicorn", "--bind", ":8000", "--workers", "3", "src.server:server"]
+CMD [ "gunicorn", "--workers=5", "--threads=1", "-b 0.0.0.0:8000", "server.servidor:app"]
+# run entrypoint.sh
+#ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

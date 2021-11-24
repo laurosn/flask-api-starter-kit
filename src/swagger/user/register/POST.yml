@@ -1,0 +1,24 @@
+Create an user based on the sent information
+---
+tags:
+  - user
+parameters:
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email of the user
+        password:
+          type: string
+          description: The password of the user
+responses:
+  200:
+    description: The user was successfully created
+    schema:
+      example:
+        user:
+          email: laurosn@gmail.com
+          password: autobots2021

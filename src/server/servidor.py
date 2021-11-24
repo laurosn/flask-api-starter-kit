@@ -2,9 +2,11 @@ from flasgger import Swagger
 from flask import Flask
 from flask.blueprints import Blueprint
 
-import config
+import server.config_params
 import routes
 from models import db, ma
+from flask_bcrypt import Bcrypt
+
 
 # config your API specs
 # you can define multiple specs in the case your api has multiple versions
@@ -12,8 +14,8 @@ from models import db, ma
 # rule_filter is a callable that receives "Rule" object and
 #   returns a boolean to filter in only desired views
 
-server = Flask(__name__)
-server.config["SWAGGER"] = {
+app = Flask(__name__)
+app.config["SWAGGER"] = {
     "swagger_version": "2.0",
     "title": "Application",
     "specs": [
@@ -28,18 +30,19 @@ server.config["SWAGGER"] = {
     "static_url_path": "/apidocs",
 }
 
-Swagger(server)
+Swagger(app)
 
-server.debug = config.DEBUG
-server.config["SQLALCHEMY_DATABASE_URI"] = config.DB_URI
-server.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config.SQLALCHEMY_TRACK_MODIFICATIONS
-db.init_app(server)
-db.app = server
-ma.init_app(server)
-ma.app = server
+app.debug = server.config_params.DEBUG
+app.config["SQLALCHEMY_DATABASE_URI"] = server.config_params.DB_URI
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = server.config_params.SQLALCHEMY_TRACK_MODIFICATIONS
+db.init_app(app)
+db.app = app
+ma.init_app(app)
+ma.app = app
+bcrypt = Bcrypt(app)
 for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):
-        server.register_blueprint(blueprint, url_prefix=config.APPLICATION_ROOT)
+        app.register_blueprint(blueprint, url_prefix=server.config_params.APPLICATION_ROOT)
 
 if __name__ == "__main__":
-    server.run(host=config.HOST, port=config.PORT)
+    app.run(host=server.config_params.HOST, port=server.config_params.PORT)

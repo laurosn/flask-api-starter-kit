@@ -10,7 +10,7 @@ from flask_restful.reqparse import Argument
 from sqlalchemy import exc
 
 from repositories import ComandoRepository,SistemaRepository
-from util import parse_params
+from util import validate_token
 from models import ComandoSchema
 
 
@@ -19,6 +19,7 @@ class ComandoExecutionResource(Resource):
 
     @staticmethod
     @swag_from("../swagger/execution/GET.yml")
+    @validate_token
     def get(id, sistema_id):
         """ Return an comando key information based on his id """
         sistema_repository = SistemaRepository() 

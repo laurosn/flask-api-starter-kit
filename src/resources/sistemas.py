@@ -9,8 +9,8 @@ from flask_restful.reqparse import Argument
 from flask import request, make_response
 
 from repositories import SistemaRepository
-from models import SistemaSchema, Sistema
-from util import parse_params
+from models.sistema import SistemaSchema, Sistema
+from util import parse_params, validate_token
 import json
 
 class SistemasResource(Resource):
@@ -18,6 +18,7 @@ class SistemasResource(Resource):
 
     @staticmethod
     @swag_from("../swagger/sistemas/GET.yml")
+    @validate_token
     def get():
         """ Return all sistemas """
         sistema_schema =SistemaSchema()
@@ -32,6 +33,7 @@ class SistemasResource(Resource):
         Argument("sistemas", location="json", required=True, help="The id of the sistema." , )
     )
     @swag_from("../swagger/sistemas/POST.yml")
+    @validate_token
     def post(sistemas):
         """ Create an sistema based on the sent information """
         json_data  = request.get_json(force=True)

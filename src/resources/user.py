@@ -6,52 +6,105 @@ from flasgger import swag_from
 from flask.json import jsonify
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
+from flask import request, make_response
+from models.user import User, UserSchema
+from models import db
+from server import servidor
 
-from repositories import UserRepository
-from util import parse_params
+
+from util import validate_token
 
 
-class UserResource(Resource):
+class UserRegisterResource(Resource):
     """ Verbs relative to the users """
 
-    @staticmethod
-    @swag_from("../swagger/user/GET.yml")
-    def get(last_name, first_name):
-        """ Return an user key information based on his name """
-        user = UserRepository.get(last_name=last_name, first_name=first_name)
-        return jsonify({"user": user.json})
 
     @staticmethod
-    @parse_params(
-        Argument("age", location="json", required=True, help="The age of the user.")
-    )
-    @swag_from("../swagger/user/POST.yml")
-    def post(last_name, first_name, age):
+    @swag_from("../swagger/user/register/POST.yml")
+    def post():
         """ Create an user based on the sent information """
-        user = UserRepository.create(
-            last_name=last_name, first_name=first_name, age=age
-        )
-        return jsonify({"user": user.json})
-
-    @staticmethod
-    @parse_params(
-        Argument("age", location="json", required=True, help="The age of the user.")
-    )
-    @swag_from("../swagger/user/PUT.yml")
-    def put(last_name, first_name, age):
-        """ Update an user based on the sent information """
-        repository = UserRepository()
-        user = repository.update(last_name=last_name, first_name=first_name, age=age)
-        return jsonify({"user": user.json})
-
-
-    @staticmethod
-    @swag_from("../swagger/user/DELETE.yml")
-    def delete(last_name, first_name):
-        repository = UserRepository()
-        user = repository.delete(last_name=last_name, first_name=first_name)
-        if user:
-            return jsonify({"delete": f"usuário {first_name} excluido com sucesso"})
+        post_data = request.get_json(force=True)
+        print(post_data,flush=True)
+        # check if user already exists
+        user = User.query.filter_by(email=post_data.get('email')).first()
+        if not user:
+            try:
+                user = User(
+                    email=post_data.get('email'),
+                    password=post_data.get('password')
+                )
+                # insert the user
+                db.session.add(user)
+                db.session.commit()
+                # generate the auth token
+                auth_token = user.encode_auth_token(user.id)
+                responseObject = {
+                    'status': 'success',
+                    'message': 'Successfully registered.',
+                    'auth_token': auth_token.decode()
+                }
+                return make_response(jsonify(responseObject), 201)
+                #return make_response(jsonify({"post": f"sistemas criados com sucesso"}), 201)
+            except Exception as e:
+                responseObject = {
+                    'status': 'fail',
+                    'message': 'Some error occurred. Please try again.',
+                    'exception': e
+                }
+                return make_response(jsonify(responseObject), 401)
         else:
-            return jsonify({"delete": f"usuário {first_name} nao encontrado"})
+            responseObject = {
+                'status': 'fail',
+                'message': 'User already exists. Please Log in.',
+            }
+            return make_response(jsonify(responseObject), 202)
+
+class UserLoginResource(Resource):
+    """
+    User Login Resource
+    """
+    @staticmethod
+    @swag_from("../swagger/user/login/POST.yml")
+    def post():
+        # get the post data
+        post_data = request.get_json(force=True)
+        try:
+            # fetch the user data
+            user = User.query.filter_by(
+                email=post_data.get('email')
+            ).first()
+            if user and servidor.bcrypt.check_password_hash(
+                user.password, post_data.get('password')
+            ):
+                auth_token = user.encode_auth_token(user.id)
+                if auth_token:
+                    responseObject = {
+                        'status': 'success',
+                        'message': 'Successfully logged in.',
+                        'auth_token': auth_token.decode()
+                    }
+                    return make_response(jsonify(responseObject), 200)
+            else:
+                responseObject = {
+                    'status': 'fail',
+                    'message': 'User does not exist.'
+                }
+                return make_response(jsonify(responseObject), 404)
+        except Exception as e:
+            print(e)
+            responseObject = {
+                'status': 'fail',
+                'message': 'Try again'
+            }
+            return make_response(jsonify(responseObject), 500)
  
+class UsersResource(Resource):
+    """ Verbs relative to the sistemas """
+    @staticmethod
+    @swag_from("../swagger/user/list/GET.yml")
+    @validate_token
+    def get():
+        """ Return all users """
+        user_schema = UserSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return user_schema.dump(User.query.all(), many=True)

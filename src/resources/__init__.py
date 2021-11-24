@@ -1,4 +1,4 @@
-from .user import UserResource
+from .user import UserRegisterResource, UserLoginResource, UsersResource
 from .sistema import SistemaResource
 from .sistemas import SistemasResource
 from .comandos import ComandosResource

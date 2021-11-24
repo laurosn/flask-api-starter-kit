@@ -2,7 +2,7 @@
 Define the Comando model
 """
 from . import db, ma
-from .abc import BaseModel, MetaBaseModel
+
 # from server import ma
 
 class Comando(db.Model):

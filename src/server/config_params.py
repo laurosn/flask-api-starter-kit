@@ -17,6 +17,9 @@ POSTGRES = {
 }
 DB_URI = "postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s" % POSTGRES
 
+SECRET_KEY = os.getenv('SECRET_KEY', 'autobots2021')
+BCRYPT_LOG_ROUNDS = 13
+
 logging.basicConfig(
     filename=os.getenv("SERVICE_LOG", "server.log"),
     level=logging.DEBUG,

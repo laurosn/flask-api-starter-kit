@@ -8,32 +8,48 @@ Content-Type: application/json
 }
 
 ### Cria varios sistemas
-POST http://127.0.0.1:3000/application/sistemas/
+POST http://45.55.48.10/application/sistemas/
 Content-Type: application/json
 
 {
   "sistemas": [
    {
     "id": 2,
-    "name": "sistema 2",
-    "environment": "prod"
+    "name": "sistema tes",
+    "environment": "tes"
    },
    {
     "id": 3,
-    "name": "sistema 3",
-    "environment": "prod"
+    "name": "sistema teste",
+    "environment": "tes"
    },
    {
     "id": 4,
-    "name": "sistema 4",
+    "name": "sistema dog",
     "environment": "prod"
+   },
+   {
+    "id": 5,
+    "name": "sistema teste2",
+    "environment": "prod"
+   },
+   {
+    "id": 6,
+    "name": "sistema autobots",
+    "environment": "prod"
+   },
+   {
+    "id": 7,
+    "name": "sistema cota",
+    "environment": "hom"
    }
  ]
 }
 
 
 ### Obtem todos os sistemas
-GET http://127.0.0.1:3000/application/sistemas/
+GET http://127.0.0.1/application/sistemas/
+Authorization: token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzc3NTAzNTcsImlhdCI6MTYzNzc1MDA1Nywic3ViIjoxfQ.sRU2ZGR-nxD-yslnx11uEFrZRrrk-JA80R4OsfRzbsM
 
 
 
@@ -46,24 +62,29 @@ GET http://127.0.0.1:3000/application/sistema/2/comandos
 
 
 ### Obtem os comandos de um sistema
-POST http://127.0.0.1:3000/application/sistema/2/comandos
+POST http://45.55.48.10/application/sistema/7/comandos
 Content-Type: application/json
 
 {
   "comandos": [
    {
-    "name": "comando 12",
-    "parametros": "prod init 22",
+    "name": "start",
+    "parametros": "prod init 66",
+    "retorno": "comando 66 executado com sucesso"
+   },
+   {
+    "name": "stop",
+    "parametros": "stop init 66",
     "retorno": "comando xpto executado com sucesso"
    },
    {
-    "name": "comando 122",
-    "parametros": "tes init 23",
-    "retorno": "comando xpto executado com sucesso"
+    "name": "deploy",
+    "parametros": "deploy 66",
+    "retorno": "erro ao executar deploy"
    },
    {
-    "name": "comando 4",
-    "parametros": "hom init 33",
+    "name": "undeploy",
+    "parametros": "undeploy 66",
     "retorno": "erro ao executar"
    }
  ]

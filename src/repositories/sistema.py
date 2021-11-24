@@ -1,6 +1,7 @@
 """ Defines the Sistema repository """
 
-from models import Sistema, db
+from models.sistema import Sistema
+from models import db
 
 
 class SistemaRepository:
