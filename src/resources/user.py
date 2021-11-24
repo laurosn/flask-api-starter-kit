@@ -7,11 +7,12 @@ from flask.json import jsonify
 from flask_restful import Resource
 from flask_restful.reqparse import Argument
 from flask import request, make_response
-from models.user import User
+from models.user import User, UserSchema
 from models import db
+from server import servidor
 
 
-from util import parse_params
+from util import validate_token
 
 
 class UserRegisterResource(Resource):
@@ -58,5 +59,52 @@ class UserRegisterResource(Resource):
             }
             return make_response(jsonify(responseObject), 202)
 
-
+class UserLoginResource(Resource):
+    """
+    User Login Resource
+    """
+    @staticmethod
+    @swag_from("../swagger/user/login/POST.yml")
+    def post():
+        # get the post data
+        post_data = request.get_json(force=True)
+        try:
+            # fetch the user data
+            user = User.query.filter_by(
+                email=post_data.get('email')
+            ).first()
+            if user and servidor.bcrypt.check_password_hash(
+                user.password, post_data.get('password')
+            ):
+                auth_token = user.encode_auth_token(user.id)
+                if auth_token:
+                    responseObject = {
+                        'status': 'success',
+                        'message': 'Successfully logged in.',
+                        'auth_token': auth_token.decode()
+                    }
+                    return make_response(jsonify(responseObject), 200)
+            else:
+                responseObject = {
+                    'status': 'fail',
+                    'message': 'User does not exist.'
+                }
+                return make_response(jsonify(responseObject), 404)
+        except Exception as e:
+            print(e)
+            responseObject = {
+                'status': 'fail',
+                'message': 'Try again'
+            }
+            return make_response(jsonify(responseObject), 500)
  
+class UsersResource(Resource):
+    """ Verbs relative to the sistemas """
+    @staticmethod
+    @swag_from("../swagger/user/list/GET.yml")
+    @validate_token
+    def get():
+        """ Return all users """
+        user_schema = UserSchema()
+        #sistema_schema = SistemaRepository.get(id=id)
+        return user_schema.dump(User.query.all(), many=True)

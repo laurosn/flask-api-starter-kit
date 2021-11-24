@@ -1,0 +1,20 @@
+Return list of users
+---
+tags:
+  - sistema
+#parameters:
+definitions:
+  User:
+    type: object
+    properties:
+      email:
+        type: integer
+      password:
+        type: string
+responses:
+  200:
+    description: The list of users were successfully retrieved
+    schema:
+      type: array 
+      items:
+        $ref: '#/definitions/User' 

@@ -10,7 +10,7 @@ from flask_restful import Resource
 from flask_restful.reqparse import Argument
 
 from repositories import ComandoRepository, SistemaRepository
-from util import parse_params
+from util import parse_params, validate_token
 from models.comando import ComandoSchema 
 from sqlalchemy import exc
 
@@ -20,6 +20,7 @@ class ComandosResource(Resource):
 
     @staticmethod
     @swag_from("../swagger/comandos/GET.yml")
+    @validate_token
     def get(id):
         """ Return an sistema key information based on his id """
         comando_schema =ComandoSchema()
@@ -33,6 +34,7 @@ class ComandosResource(Resource):
         Argument("comandos", location="json", required=True, help="The list of comandos." , )
     )
     @swag_from("../swagger/comandos/POST.yml")
+    @validate_token
     def post(id, comandos):
         """ Create an sistema based on the sent information """
         #print(comandos, flush=True)

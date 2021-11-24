@@ -7,6 +7,19 @@ Content-Type: application/json
     "password": "devops"
 }
 
+### Login do USUARIO
+POST http://127.0.0.1/application/user/login
+Content-Type: application/json
+
+{
+    "email": "laurosn@gmail.com",
+    "password": "devops"
+}
 
 ### Deleta o usuario
 DELETE http://127.0.0.1:3000/application/user/Doe/John
+
+
+### Obtem todos os sistemas
+GET http://127.0.0.1/application/users
+Authorization: token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzc3NTIyMjYsImlhdCI6MTYzNzc1MTkyNiwic3ViIjoxfQ.rZAs9tgcNtEbDDrO3YMWCWAGVEnnt06-BPHPm5m8bGI

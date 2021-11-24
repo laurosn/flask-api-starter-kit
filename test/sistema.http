@@ -48,7 +48,8 @@ Content-Type: application/json
 
 
 ### Obtem todos os sistemas
-GET http://127.0.0.1:3000/application/sistemas/
+GET http://127.0.0.1/application/sistemas/
+Authorization: token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzc3NTAzNTcsImlhdCI6MTYzNzc1MDA1Nywic3ViIjoxfQ.sRU2ZGR-nxD-yslnx11uEFrZRrrk-JA80R4OsfRzbsM
 
 
 

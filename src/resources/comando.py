@@ -10,7 +10,7 @@ from flask_restful.reqparse import Argument
 from sqlalchemy import exc
 
 from repositories import ComandoRepository,SistemaRepository
-from util import parse_params
+from util import parse_params, validate_token
 from models.comando import ComandoSchema
 
 
@@ -19,6 +19,7 @@ class ComandoResource(Resource):
 
     @staticmethod
     @swag_from("../swagger/comando/GET.yml")
+    @validate_token
     def get(id, sistema_id):
         """ Return an comando key information based on his id """
         sistema_repository = SistemaRepository() 
@@ -38,6 +39,7 @@ class ComandoResource(Resource):
         Argument("name", location="json", required=True, help="The name of the sistema.")
     )
     @swag_from("../swagger/comando/POST.yml")
+    @validate_token
     def post(id, name, parametros, retorno, sistema_id):
         """ Create an comando based on the sent information """
         sistema_repository = SistemaRepository() 
@@ -60,6 +62,7 @@ class ComandoResource(Resource):
         Argument("name", location="json", required=True, help="The name of the sistema.")
     )
     @swag_from("../swagger/comando/PUT.yml")
+    @validate_token
     def put(id, name, parametros, retorno, sistema_id):
         """ Update an comando based on the sent information """
         sistema_repository = SistemaRepository() 
@@ -76,6 +79,7 @@ class ComandoResource(Resource):
 
     @staticmethod
     @swag_from("../swagger/comando/DELETE.yml")
+    @validate_token
     def delete(id, sistema_id):
         sistema_repository = SistemaRepository() 
         sistema = sistema_repository.get(id=sistema_id)
