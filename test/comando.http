@@ -1,5 +1,9 @@
+@hostname = 127.0.0.1
+@port = 80
+@host = {{hostname}}:{{port}}
+
 ### Cria um comando
-POST http://127.0.0.1:3000/application/sistema/1/comando/10
+POST http://{{host}}/application/sistema/1/comando/10
 Content-Type: application/json
 
 {
@@ -9,15 +13,15 @@ Content-Type: application/json
 }
 
 ### Obtem um comando
-GET http://127.0.0.1:3000/application/sistema/2/comando/21
+GET http://{{host}}/application/sistema/2/comando/21
 
 
 ### Execucao de um sistema
-GET http://127.0.0.1:3000/application/sistema/2/comando/21/execute
+GET http://{{host}}/application/sistema/2/comando/21/execute
 
 
 ### Atualiza um comando
-PUT http://127.0.0.1:3000/application/sistema/1/comando/1
+PUT http://{{host}}/application/sistema/1/comando/1
 Content-Type: application/json
 
 {
@@ -27,4 +31,4 @@ Content-Type: application/json
 }
 
 ### Deleta o comando
-DELETE http://127.0.0.1:3000/application/sistema/1/comando/1
+DELETE http://{{host}}/application/sistema/1/comando/1

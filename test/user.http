@@ -1,5 +1,10 @@
+@hostname = 127.0.0.1
+@port = 80
+@host = {{hostname}}:{{port}}
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzc4MzQ2NDEsImlhdCI6MTYzNzgzNDM0MSwic3ViIjoxfQ.4w7SqgY4oSex00H9B3RSUcLAtc1RJC3E4ty3ROD4EMY
+
 ### Cria um USUARIO
-POST http://127.0.0.1/application/user/register
+POST http://{{host}}/application/user/register
 Content-Type: application/json
 
 {
@@ -8,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Login do USUARIO
-POST http://127.0.0.1/application/user/login
+POST http://{{host}}/application/user/login
 Content-Type: application/json
 
 {
@@ -17,9 +22,9 @@ Content-Type: application/json
 }
 
 ### Deleta o usuario
-DELETE http://127.0.0.1:3000/application/user/Doe/John
+DELETE http://{{host}}/application/user/Doe/John
 
 
 ### Obtem todos os sistemas
-GET http://127.0.0.1/application/users
-Authorization: token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzc3NTIyMjYsImlhdCI6MTYzNzc1MTkyNiwic3ViIjoxfQ.rZAs9tgcNtEbDDrO3YMWCWAGVEnnt06-BPHPm5m8bGI
+GET http://{{host}}/application/users
+Authorization: token {{token}}

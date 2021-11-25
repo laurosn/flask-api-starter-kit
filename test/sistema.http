@@ -1,15 +1,22 @@
+@hostname = 127.0.0.1
+@port = 80
+@host = {{hostname}}:{{port}}
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzc4MzUxNDQsImlhdCI6MTYzNzgzNDg0NCwic3ViIjoxfQ.ii-KQYnVee72ra1xsmwdu6195cDJ2G6muKmv-QCafic
+
 ### Cria um SISTEMA
-POST http://127.0.0.1:3000/application/sistema/2
+POST http://{{host}}/application/sistema/10
 Content-Type: application/json
+Authorization: token {{token}}
 
 {
-    "name": "sistema 1",
+    "name": "sistema 10",
     "environment": "prod"
 }
 
 ### Cria varios sistemas
-POST http://45.55.48.10/application/sistemas/
+POST http://{{host}}/application/sistemas/
 Content-Type: application/json
+Authorization: token {{token}}
 
 {
   "sistemas": [
@@ -48,22 +55,23 @@ Content-Type: application/json
 
 
 ### Obtem todos os sistemas
-GET http://127.0.0.1/application/sistemas/
-Authorization: token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzc3NTAzNTcsImlhdCI6MTYzNzc1MDA1Nywic3ViIjoxfQ.sRU2ZGR-nxD-yslnx11uEFrZRrrk-JA80R4OsfRzbsM
+GET http://{{host}}/application/sistemas/
+Authorization: token {{token}}
 
 
 
 ### Obtem um SISTEMA
-GET http://127.0.0.1:3000/application/sistema/2
-
-
-### Obtem os comandos de um sistema
-GET http://127.0.0.1:3000/application/sistema/2/comandos
-
+GET http://{{host}}/application/sistema/2
+Authorization: token {{token}}
 
 ### Obtem os comandos de um sistema
-POST http://45.55.48.10/application/sistema/7/comandos
+GET http://{{host}}/application/sistema/2/comandos
+Authorization: token {{token}}
+
+### Obtem os comandos de um sistema
+POST http://{{host}}/application/sistema/7/comandos
 Content-Type: application/json
+Authorization: token {{token}}
 
 {
   "comandos": [
@@ -92,8 +100,9 @@ Content-Type: application/json
 
 
 ### Atualiza um USUARIO
-PUT http://127.0.0.1:3000/application/sistema/1
+PUT http://{{host}}/application/sistema/1
 Content-Type: application/json
+Authorization: token {{token}}
 
 {
     "name": "sistema 1",
@@ -101,4 +110,5 @@ Content-Type: application/json
 }
 
 ### Deleta o usuario
-DELETE http://127.0.0.1:3000/application/sistema/2
+DELETE http://{{host}}/application/sistema/10
+Authorization: token {{token}}

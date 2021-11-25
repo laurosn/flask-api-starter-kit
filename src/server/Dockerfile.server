@@ -10,8 +10,13 @@ WORKDIR /mnt
 #RUN pip install --proxy=http://10.1.0.106 --upgrade pip
 COPY ./requirements.txt /mnt/requirements.txt
 COPY ./requirements-dev.txt /mnt/requirements-dev.txt
-RUN pip3 install --proxy=http://10.1.0.106 -r requirements-dev.txt --user --upgrade --no-warn-script-location
-RUN pip3 install --proxy=http://10.1.0.106 gunicorn
+# RUN pip3 install --proxy=http://10.1.0.106 -r requirements-dev.txt --user --upgrade --no-warn-script-location
+# RUN pip3 install --proxy=http://10.1.0.106 gunicorn
+
+RUN pip3 install -r requirements-dev.txt --user --upgrade --no-warn-script-location
+RUN pip3 install gunicorn
+
+
 # copy project
 COPY . /mnt/
 ENV PYTHONPATH /mnt/src
