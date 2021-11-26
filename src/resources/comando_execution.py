@@ -32,6 +32,6 @@ class ComandoExecutionResource(Resource):
             return make_response(jsonify({"post": f"comando {id} nao encontrado"}), 404)
         # comando_schema = ComandoSchema()
         #sistema_schema = SistemaRepository.get(id=id)
-        return make_response(jsonify({"retorno": comando.retorno}), 404)
+        return make_response(jsonify({"retorno": comando.retorno}), 200)
 
  
